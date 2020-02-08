@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Rocket Seat - JS</title>
+</head>
+
+<body>
+    <div id="lista">
+        <ul></ul>
+
+        <input type="text" name="nome">
+        <button onClick="adicionar()">Adicionar</button>
+
+    </div>
+    <div id="exercicio">
+        <button>Adicionar Quadrado</button>
+    </div>
+
+    <div id="app">
+        <ul>
+        </ul>
+        <input type="text" placeholder="digite um todo">
+        <button>Adicionar</button>
+    </div>
+    <!-- <script src="todos.js"></script> -->
+    <script>
+        function getString(endereco) {
+            console.log('O usuário mora em ' + endereco.cidade +
+                ' / ' + endereco.uf + ', no bairro ' + endereco.bairro +
+                ', na rua "' + endereco.rua + '" com nº ' + endereco.numero + '.');
+        }
+
+        function getNumerosPares(x, y) {
+            for (var i = x; i < y; i++) {
+                if (i % 2 == 0) {
+                    console.log(i)
+                }
+            }
+        }
+        function temHabilidade(skills) {
+            return skills.indexOf("Javascript") !== -1 ? true : false;
+        }
+
+        function experiencia(anos) {
+            if (anos <= 1) {
+                return 'Inciante';
+            } else if (anos <= 3) {
+                return 'Intermediário';
+            } else if (anos <= 7) {
+                return 'Avançado';
+            } else {
+                return 'Jedi Master';
+            }
+        }
+
+        function getFrase(usuarios) {
+            for (usuario of usuarios) {
+                console.log('O ' + usuario.nome + ' possui as habilidades: ' + usuario.habilidades.join(', '));
+            }
+        }
+        var endereco = {
+            rua: "Rua dos pinheiros",
+            numero: 1293,
+            bairro: "Centro",
+            cidade: "São Paulo",
+            uf: "SP"
+        };
+        var skills = ["Javascript", "ReactJS", "React Native"];
+        var anosEstudo = 0;
+        var usuarios = [
+            {
+                nome: "Diego",
+                habilidades: ["Javascript", "ReactJS", "Redux"]
+            },
+            {
+                nome: "Gabriel",
+                habilidades: ["VueJS", "Ruby on Rails", "Elixir"]
+            }
+        ];
+
+        getString(endereco);
+        getNumerosPares(32, 321);
+        getFrase(usuarios);
+        console.log(temHabilidade(skills)); // true ou false
+        console.log(experiencia(anosEstudo));
+
+
+
+        /**
+         * Lidando com elementos
+         *
+         */
+        // var linkElement = document.createElement('a');
+        // linkElement.setAttribute('href', 'https://www.google.com/');
+        // linkElement.setAttribute('target', '_blank');
+
+        // var textElement = document.createTextNode('Acessar Google');
+
+        // linkElement.appendChild(textElement);
+
+        // var containerElement = document.querySelector('div#app');
+        // containerElement.appendChild(linkElement);
+        /**
+         * Fim lidando com elementos
+         *
+         */
+
+        var button = document.querySelector('#exercicio button');
+        function getRandomColor() {
+            var letters = "0123456789ABCDEF";
+            var color = "#";
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+
+        button.onclick = function () {
+            var divElement = document.createElement('div');
+            divElement.style.width = '100px';
+            divElement.style.height = '100px';
+            divElement.style.backgroundColor = 'red';
+            var bodyElement = document.querySelector('body');
+            bodyElement.appendChild(divElement);
+            var newColor = getRandomColor();
+            divElement.onmouseover = function () {
+                divElement.style.backgroundColor = newColor;
+            }
+        }
+
+
+        var listElement = document.querySelector('div#lista ul');
+
+        var nomes = ["Diego", "Gabriel", "Lucas"];
+
+        for (nome of nomes) {
+            criaElemento(nome);
+
+        }
+
+        function criaElemento(nome){
+            var nomeElement = document.createElement('li');
+            var nomeText = document.createTextNode(nome);
+            nomeElement.appendChild(nomeText);
+            listElement.appendChild(nomeElement);
+        }
+
+        function adicionar(){
+            var inputElement = document.querySelector('#lista input');
+            criaElemento(inputElement.value);
+            inputElement.value = '';
+
+        }
+
+
+
+
+    </script>
+</body>
+
+</html>
